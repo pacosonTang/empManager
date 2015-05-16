@@ -5,6 +5,7 @@
 </head>
 <body>
     <h1>管理员登录 </h1>
+    <h2><a href="index.php">首页</a></h2>
     <form action="loginprocess.php" method="post">
                 用户账号： <input name="username" type="text"/><br/><br/>
                 用户密码： <input name="userpass" type="password"/><br/><br/>

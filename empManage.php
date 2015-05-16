@@ -10,6 +10,6 @@
     <a href="">添加用户</a><br/>
     <a>删除用户</a><br/>
     <a>修改用户</a><br/>
-    <a>查看用户</a><br/>
+    <a href='empList.php'>查看用户</a><br/>
 </body>
 </html>

@@ -13,7 +13,7 @@
         die();
     }
     for ($i = 1990; $i < 1995; $i++) {
-        $name = "tr".$i;
+        $name = "emp".$i;
         $userpass = md5($i);
         $email = "pacoson".$i."@163.com";
         $stmt->execute();
