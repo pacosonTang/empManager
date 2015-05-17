@@ -15,17 +15,11 @@
             <th>性别</th>
             <th>CRUD 操作</th>
         </tr>
-    
     <?php 
-         echo "=== 想数据库中插入数据项 ===<br/>";
-        $db = new mysqli( "localhost", "root", "root", "emp_manager" );
-        if( $db -> connect_errno )
-            die( $db -> connect_errno );
-        echo "=== 连接数据库成功 ===<br/>";
-        $db -> query( "set names utf8" );
+        require_once 'EmpService.class.php';
         
         //显示pageSize=5 pageNow=2
-        $pageSize = 8; //每页显示的记录数目
+        $pageSize = 10; //每页显示的记录数目
         $rowCount = 0; //多少条记录
         $pageNow = 1; //显示第几页
         $pageCount = 0;//共有多少页
@@ -34,36 +28,25 @@
         if(!empty($_GET['pageNow']))
             $pageNow = $_GET['pageNow'];
         
-        $sql ="select count(id) from emp";
-        //取出行数
-        if($res1 = $db->query($sql))
-            if($row=$res1->fetch_row())
-                $rowCount = $row[0];
+        $empService = new EmpService();
+        //共有多少条记录
+        $rowCount = $empService->getRowCount();
+        
         //计算共有多少页
-        $pageCount = ceil($rowCount/$pageSize);
+        $pageCount = $empService->getPageCount($pageSize);
 
-        $sql = "select * from emp limit ".($pageNow-1)*$pageSize.",".$pageSize;
-        
-        if($res = $db->query($sql)) {
-            echo "取出密码成功<br/>";
-            while( $row = $res->fetch_assoc() ) {
-                echo "<tr style='padding: 2px'>";
-                echo "<td>".$row['id']."</td>";
-                echo "<td>".$row['name']."</td>";
-                echo "<td>".$row['email']."</td>";
-                echo "<td>".$row['salary']."</td>";
-                echo "<td>".$row['grade']."</td>";
-                echo "<td><a href='#'>删除</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#'>修改</a></td>";
-                echo "</tr>";
+        //分页取出数据,$res是个复合数组
+        $res = $empService->getPerPage($pageNow, $pageSize);
+        for ($i=0;$i<count($res);$i++){
+            $row = $res[$i];
+            echo "<tr style='padding: 2px'>";
+            for ($j = 0; $j < count($row); $j++) {
+                echo "<td>".$row[$j]."</td>";
             }
-            $res->close();
+            echo "<td><a href='#'>删除</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#'>修改</a></td>";
+            echo "</tr>";
         }
-        $db->close();
-        /* echo "<tr><td colspan='6'>";
-        for ($i=1;$i<=$pageCount;$i++)
-            echo "  <a href='./empList.php?pageNow=$i'>".$i."</a>  ";
-        echo "</td></tr>"; */
-        
+        $empService->baseDao->close_conn();
         //上一页或下一页
         echo "<tr><td colspan='6'>";
         if($pageNow>1) {
@@ -78,9 +61,31 @@
         
         //显示当前多少页
         echo "<br/>当前第".$pageNow."页/共".$pageCount."页";
+        
+        //整体向前翻10页；
+        if ($pageNow > 10) {
+            $wholePrePage = floor(($pageNow + $pageSize - 1)/$pageSize - 2) * $pageSize + 1;
+            echo "  <a href='./empList.php?pageNow=$wholePrePage'><<前翻10页</a>  ";
+        }
+        
+        //可以使用for打印链接
+        $index = floor( ($pageNow-1) / $pageSize )*$pageSize+1;
+        //$start 1---10 ,11---20, 每10页作为一个显示集合
+        for ($i=0; $i < $pageSize; $i++) {
+            
+            $start = $index + $i;
+            echo "  <a href='./empList.php?pageNow=$start'>[$start]</a>  "; 
+        }
+        
+        //整体向后翻10页；
+        if ($pageNow < $pageCount)
+            $wholeAfterPage = floor(($pageNow + $pageSize - 1)/$pageSize) * $pageSize + 1;
+            echo "  <a href='./empList.php?pageNow=$wholeAfterPage'>后翻10页>></a>  "; 
         echo "</td></tr>";
+        
     ?>
     </table>
+    
     <!-- 跳转到某一页 -->
     <form action="./empList.php" method="get">
                         跳转到第&nbsp;<input name='pageNow'/>&nbsp;页
