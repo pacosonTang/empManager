@@ -17,26 +17,33 @@
         </tr>
     <?php 
         require_once 'EmpService.class.php';
+        require_once 'Paging.class.php';
         
-        //显示pageSize=5 pageNow=2
-        $pageSize = 10; //每页显示的记录数目
-        $rowCount = 0; //多少条记录
-        $pageNow = 1; //显示第几页
-        $pageCount = 0;//共有多少页
+        //1.创建分页对象
+        $paging = new Paging();
         
         //这里接收用户点击的pageNow
         if(!empty($_GET['pageNow']))
-            $pageNow = $_GET['pageNow'];
-        
+            $paging->setPageNow($_GET['pageNow']);
+         
+        //2.创建EmpService对象实例      
         $empService = new EmpService();
-        //共有多少条记录
-        $rowCount = $empService->getRowCount();
-        
-        //计算共有多少页
-        $pageCount = $empService->getPageCount($pageSize);
 
+        //2.1调用分页功能
+        $empService->getPaging($paging);
+        
+        //3.初始化page相关属性
+        //3.1共有多少页
+        $pageCount = $paging->getPageCount();
+        //3.2当前页
+        $pageNow = $paging->getPageNow();
+        //3.3共有多少条记录
+        $rowCount = $paging->getRowCount();
+        //3.4 页面显示行数大小
+        $pageSize = $paging->getPageSize();
+        
         //分页取出数据,$res是个复合数组
-        $res = $empService->getPerPage($pageNow, $pageSize);
+        $res = $paging->getRes_array();
         for ($i=0;$i<count($res);$i++){
             $row = $res[$i];
             echo "<tr style='padding: 2px'>";
@@ -46,7 +53,10 @@
             echo "<td><a href='#'>删除</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#'>修改</a></td>";
             echo "</tr>";
         }
-        $empService->baseDao->close_conn();
+        
+        //关闭数据库连接
+        //$empService->baseDao->close_conn();
+        
         //上一页或下一页
         echo "<tr><td colspan='6'>";
         if($pageNow>1) {
@@ -68,7 +78,7 @@
             echo "  <a href='./empList.php?pageNow=$wholePrePage'><<前翻10页</a>  ";
         }
         
-        //可以使用for打印链接
+        //可以使用for打印页面导航链接 1~10,11~20,...
         $index = floor( ($pageNow-1) / $pageSize )*$pageSize+1;
         //$start 1---10 ,11---20, 每10页作为一个显示集合
         for ($i=0; $i < $pageSize; $i++) {
@@ -78,9 +88,10 @@
         }
         
         //整体向后翻10页；
-        if ($pageNow < $pageCount)
+        if ($pageNow < $pageCount) {
             $wholeAfterPage = floor(($pageNow + $pageSize - 1)/$pageSize) * $pageSize + 1;
-            echo "  <a href='./empList.php?pageNow=$wholeAfterPage'>后翻10页>></a>  "; 
+            echo "  <a href='./empList.php?pageNow=$wholeAfterPage'>后翻10页>></a>  ";
+        } 
         echo "</td></tr>";
         
     ?>
