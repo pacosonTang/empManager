@@ -42,5 +42,11 @@ class EmpService {
         $this->baseDao->execute_paging($sql1, $sql2, $paging);
     }
     
+    //通过empid删除Emp用户
+    function delEmpById($id){
+        
+        $sql = "delete from emp where id=$id";
+        return $this->baseDao->execute_dml($sql);
+    }
     
 }

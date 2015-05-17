@@ -3,6 +3,14 @@
 <head>
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <title>雇员信息列表</title>
+<script type="text/javascript">
+
+    //确认是否删除用户
+    function confirmDel(val){
+        return window.confirm("是否删除id为" + val + "的用户");
+    }
+
+</script>
 </head>
 <body>
      <h2><a href="index.php">首页</a></h2>
@@ -19,17 +27,25 @@
         require_once 'EmpService.class.php';
         require_once 'Paging.class.php';
         
-        //1.创建分页对象
+        //1.创建EmpService对象实例
+        $empService = new EmpService();
+        
+        
+        //先看看用户要分页还是删除
+        if(!empty($_GET['flag'])){
+            $id=$_GET['id'];
+            echo "删除id = ".$id;
+            $empService->delEmpById($id);
+        }
+        
+        //2.创建分页对象
         $paging = new Paging();
         
-        //这里接收用户点击的pageNow
+        //2.1这里接收用户点击的pageNow
         if(!empty($_GET['pageNow']))
             $paging->setPageNow($_GET['pageNow']);
-         
-        //2.创建EmpService对象实例      
-        $empService = new EmpService();
-
-        //2.1调用分页功能
+       
+        //2.2调用分页功能
         $empService->getPaging($paging);
         
         //3.初始化page相关属性
@@ -50,7 +66,7 @@
             for ($j = 0; $j < count($row); $j++) {
                 echo "<td>".$row[$j]."</td>";
             }
-            echo "<td><a href='#'>删除</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#'>修改</a></td>";
+            echo "<td><a onclick='return confirmDel($row[0])' href='./empList.php?flag=del&id=$row[0]'>删除</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#'>修改</a></td>";
             echo "</tr>";
         }
         
