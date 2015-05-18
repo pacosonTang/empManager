@@ -1,12 +1,45 @@
 <?php
     require_once 'BaseDao.class.php';
     require_once 'Paging.class.php';
+    require_once 'com.bean/Emp.class.php';
+    
 class EmpService {
     
     public $baseDao;
     
     public function __construct(){
         $this->baseDao = new BaseDao(); 
+    }
+    
+    function updateEmp($id,$name,$grade,$email,$salary){
+        
+        $this->baseDao = new BaseDao();
+        $sql = "update emp set name='$name',grade='$grade',email='$email',salary='$salary' where id = '$id'";
+        //$res 是一个数组
+        $res = $this->baseDao->execute_dml($sql);
+        $this->baseDao->close_conn();
+        return $res;
+    } 
+    //查询用户
+    function getEmpById($id){
+         
+        $sql = "select * from emp where id = $id";
+
+        //$res 是一个数组 
+        $res = $this->baseDao->execute_dql($sql);
+        $this->baseDao->close_conn();
+        
+        //对数据进行二次封装
+        $emp = new Emp($res[0][0],$res[0][2],$res[0][1],$res[0][2],$res[0][3],$res[0][4]);
+        return $emp;
+    }
+    
+    // 添加用户
+    function empAdd($name, $grade, $email, $salary){
+        $sql = "insert into emp(name,grade,email,salary) values('$name','$grade','$email','$salary')";
+        $res = $this->baseDao->execute_dml($sql);
+        $this->baseDao->close_conn();
+        return $res;
     }
     
     //共有多少页

@@ -6,6 +6,7 @@ class Paging{
     private $rowCount;
     private $pageNow;
     private $pageCount;
+    private $gotoUrl;
     
     public function __construct(){
         $this->pageSize = 10;
@@ -90,4 +91,22 @@ class Paging{
     {
         $this->pageCount = $pageCount;
     }
+ /**
+     * @return the $gotoUrl
+     */
+    public function getGotoUrl()
+    {
+        return $this->gotoUrl;
+    }
+
+ /**
+     * @param field_type $gotoUrl
+     */
+    public function setGotoUrl($gotoUrl)
+    {
+        $this->gotoUrl = $gotoUrl;
+    }
+
+    
+    
 }

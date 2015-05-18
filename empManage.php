@@ -7,9 +7,7 @@
     <h1><?php echo $_GET['email']?>登录成功</h1><br/>
     <a href='login.php'>重新返回登录页面</a><br/>
     <h1>主界面</h1>
-    <a href="">添加用户</a><br/>
-    <a>删除用户</a><br/>
-    <a>修改用户</a><br/>
+    <a href="./empAdd.php">添加用户</a><br/>
     <a href='empList.php'>查看用户</a><br/>
 </body>
 </html>

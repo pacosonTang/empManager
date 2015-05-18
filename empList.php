@@ -30,7 +30,6 @@
         //1.创建EmpService对象实例
         $empService = new EmpService();
         
-        
         //先看看用户要分页还是删除
         if(!empty($_GET['flag'])){
             $id=$_GET['id'];
@@ -40,6 +39,8 @@
         
         //2.创建分页对象
         $paging = new Paging();
+        //设置gotourl
+        $paging->setGotoUrl("");
         
         //2.1这里接收用户点击的pageNow
         if(!empty($_GET['pageNow']))
@@ -66,7 +67,7 @@
             for ($j = 0; $j < count($row); $j++) {
                 echo "<td>".$row[$j]."</td>";
             }
-            echo "<td><a onclick='return confirmDel($row[0])' href='./empList.php?flag=del&id=$row[0]'>删除</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#'>修改</a></td>";
+            echo "<td><a onclick='return confirmDel($row[0])' href='../com.action/EmpAction.php?flag=del&id=$row[0]'>删除</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='./updateEmp.php?id=$row[0]'>修改</a></td>";
             echo "</tr>";
         }
         
