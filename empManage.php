@@ -4,6 +4,11 @@
 <title>雇员管理主页面</title>
 </head>
 <body>
+    <?php 
+        require_once 'cookie/cookie_alert.php';
+        getLastVisit();
+        echo "<br/>";
+    ?>
     <h1><?php echo $_GET['email']?>登录成功</h1><br/>
     <a href='login.php'>重新返回登录页面</a><br/>
     <h1>主界面</h1>
