@@ -1,5 +1,18 @@
 <?php 
     require_once 'AdminService.class.php';
+    if(empty($_POST['checkcode'])) {
+        header("Location: login.php?errno= -1");
+        exit();
+    }
+    session_start();//启动会话
+    $code=$_POST["checkcode"];
+    //判断验证码是否正确
+    if( !($code == $_SESSION["checkcode"]) ) {
+        header("Location: login.php?errno=-1");
+        exit();
+    }
+     
+  
     
     $username=$_POST['username'];
     $userpass=$_POST['userpass'];
@@ -21,6 +34,7 @@
         exit();
     }
     else { 
-        header("Location: login.php?errno=0");
+        header("Location: login.php?errno=1");
+        exit();
     }  
 ?>
