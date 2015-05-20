@@ -6,7 +6,12 @@
 <body>
     <?php 
         require_once 'cookie/cookie_alert.php';
+        require_once 'com.mySession/common_session.php';
+        //得到上一次登录的时间
         getLastVisit();
+        
+        //检测用户是否登录
+        checkUserValidate();
         echo "<br/>";
     ?>
     <h1><?php echo $_GET['email']?>登录成功</h1><br/>

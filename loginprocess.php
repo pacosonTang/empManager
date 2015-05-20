@@ -11,13 +11,16 @@
         setcookie("username","",time() - 200);
     //实例化一个adminService 
     $adminService = new AdminService();
+    
     if($adminService->checkAdmin($username, $userpass)){
         //合法，跳转到登录成功页面
-         header("Location: empManage.php?email={$adminService->getEmail()}");
+        session_start();
+        $_SESSION['loginuser'] = $username;
+        header("Location: empManage.php?email={$adminService->getEmail()}");
         //结束当前页面进程
         exit();
     }
     else { 
-        header("Location: login.php");
+        header("Location: login.php?errno=0");
     }  
 ?>
