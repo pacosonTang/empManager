@@ -1,0 +1,9 @@
+<!ELEMENT classname (stu+)>
+<!ATTLIST stu
+			address CDATA #IMPLIED
+			stuid ID #REQUIRED
+>
+<!ELEMENT stu (name,age,description)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT age (#PCDATA)>
+<!ELEMENT description (#PCDATA)>

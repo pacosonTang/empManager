@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- css 也可以作用于xml文件 -->
+<!-- -->
+<?xml-stylesheet type="text/css" href="classes.css" ?> 
+<班级>
+	<stu>
+		<name>唐荣</name>
+		<sex>男</sex> 
+		<age>500</age>
+		<介绍>你好</介绍>
+	</stu>
+	
+	<stu>
+		<name>周杰伦</name>
+		<sex>男</sex>
+		<age>50</age>
+	</stu>
+	
+	<![CDATA[
+		<<<<>>&^>
+	]]>
+</班级>

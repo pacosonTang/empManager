@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- css 也可以作用于xml文件 -->
+<?xml-stylesheet type="text/css" href="classes.css" ?>
+
+<!-- 引入dtd文件 -->
+<!-- <!DOCTYPE 跟元素  SYSTEM 路径> --> 
+
+<!-- 外部dtd写法 -->
+<!DOCTYPE classname SYSTEM "classes2.dtd"> 
+
+<!-- 内部dtd写法
+<!DOCTYPE 班级 [
+	<!ELEMENT 班级 (stu)>
+	<!ELEMENT stu (name,age,description)>
+	<!ELEMENT name (#PCDATA)>
+	<!ELEMENT age (#PCDATA)>
+	<!ELEMENT description (#PCDATA)>
+]> 
+-->
+<classname>
+	<stu address="香港" stuid="a888">
+		<name>唐荣</name>
+		<age>500</age>
+		<description>你好</description>
+	</stu>
+	
+	<stu address="台湾" stuid="a8">
+		<name>周杰伦</name>
+		<age>50</age>
+		<description>你好</description>
+	</stu>
+	
+	<![CDATA[
+		<<<<>>&^>
+	]]>
+</classname>
