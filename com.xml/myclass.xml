@@ -4,18 +4,10 @@
 	<stu>
 		<name>唐荣</name>
 		<sex>男</sex> 
-		<age>500</age>
+		<age>522</age>
 	</stu>
 	
-	<stu>
-		<name>周杰伦</name>
-		<sex>男</sex>
-		<age>50</age>
-	</stu>
 	
-	<stu>
-		<name>唐荣</name>
-		<sex>男</sex>
-		<age>24</age>
-	</stu>
-</class>
+	
+	
+<stu><name>唐荣你好</name><sex>男</sex><age>8</age></stu><stu description="我还是个学生"><name>唐荣你好</name><sex>男</sex><age>8</age></stu><stu description="我还是个学生"><name>唐荣你好</name><sex>男</sex><age>8</age></stu></class>
