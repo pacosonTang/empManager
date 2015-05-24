@@ -16,21 +16,20 @@
 	<!ELEMENT age (#PCDATA)>
 	<!ELEMENT description (#PCDATA)>
 ]> 
+注意他的子元素是有序的，不是无序的。
 -->
 <classname>
-	<stu address="香港" stuid="a888">
-		<name>唐荣</name>
+	<stu address="香港" stuid="a888" dage="a8" status="single">
+		<name>&stuinfo;唐荣</name>
 		<age>500</age>
-		<description>你好</description>
+		<description>%str;你好</description>
 	</stu>
 	
-	<stu address="台湾" stuid="a8">
-		<name>周杰伦</name>
+	<stu address="台湾" stuid="a8" dage="a888" status="single">
+		<name>&stuinfo;周杰伦</name>
 		<age>50</age>
 		<description>你好</description>
 	</stu>
 	
-	<![CDATA[
-		<<<<>>&^>
-	]]>
+	 
 </classname>

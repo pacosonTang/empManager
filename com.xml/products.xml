@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE CATALOG SYSTEM "products.dtd">
+<CATALOG>
+	<PRODUCT NAME="冰箱" CATEGORY="HandTool" PLANT="Chicago" INVENTORY="InStock">
+		<SPECIFICATIONS POWER="1000w" WEIGHT="80kg">media 冰箱</SPECIFICATIONS>
+		<OPTIONS>选项</OPTIONS>		
+		<PRICE>100</PRICE>
+		<NOTES>轻拿轻放</NOTES>
+	</PRODUCT>
+</CATALOG>

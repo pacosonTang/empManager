@@ -1,7 +1,19 @@
 <!ELEMENT classname (stu+)>
+<!-- 定义一个引用实体，建议大家把引用实体的定义放在前面 -->
+<!ENTITY stuinfo "这是一个介绍">
+
+<!-- 定义一个参数实体
+<!ENTITY % 实体名称 "实体内容共">
+在dtd中如何使用： %实体名称;
+-->
+<!ENTITY % str "i am a string">
+
 <!ATTLIST stu
 			address CDATA #IMPLIED
 			stuid ID #REQUIRED
+			dage IDREF #REQUIRED 
+			status (single|jiehun|lihun) #REQUIRED
+			country CDATA #FIXED "china"
 >
 <!ELEMENT stu (name,age,description)>
 <!ELEMENT name (#PCDATA)>
