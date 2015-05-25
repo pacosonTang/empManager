@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <words>
 	<word>
 		<en>boy</en>
@@ -13,4 +12,4 @@
 		<en>school</en>
 		<ch>学校</ch>
 	</word>
-</words>
+<word><en>append</en><ch>追加</ch></word><word><en>dog</en><ch>小狗</ch></word></words>
